@@ -1,0 +1,14 @@
+# Metrics Module
+interface Metric @entity {
+    id: ID!
+}
+
+type Accumulator implements Metric @entity {
+    id: ID!
+    total: BigDecimal!
+}
+
+type Counter implements Metric @entity {
+    id: ID!
+    count: BigInt!
+}

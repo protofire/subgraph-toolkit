@@ -1,0 +1,20 @@
+{
+  "name": "@protofire/subgraph-toolkit",
+  "version": "0.0.0",
+  "description": "AssemblyScript helpers for writing subgraph mappings for The Graph",
+  "repository": "https://github.com/protofire/subgraph-toolkit.git",
+  "license": "GPL-3.0-only",
+  "author": "Sebastián Galiano",
+  "module": "index.ts",
+  "types": "index.ts",
+  "dependencies": {
+    "@protofire/subgraph-prettier-config": "^0.1.1"
+  },
+  "devDependencies": {
+    "@graphprotocol/graph-ts": ">=0.18.0",
+    "prettier": "2.0.5"
+  },
+  "peerDependencies": {
+    "@graphprotocol/graph-ts": ">=0.18.0"
+  }
+}
