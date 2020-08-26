@@ -22,6 +22,10 @@ export namespace decimal {
   export let ZERO = BigDecimal.fromString('0')
   export let ONE = BigDecimal.fromString('1')
 
+  let WAD = BigInt.fromI32(10).pow(18).toBigDecimal()
+  let RAY = BigInt.fromI32(10).pow(27).toBigDecimal()
+  let RAD = BigInt.fromI32(10).pow(45).toBigDecimal()
+
   export function fromNumber(value: f64): BigDecimal {
     return fromString(value.toString())
   }
@@ -36,6 +40,30 @@ export namespace decimal {
       .toBigDecimal()
 
     return value.divDecimal(precision)
+  }
+
+  export function fromRad(value: BigInt): BigDecimal {
+    return value.divDecimal(RAD)
+  }
+
+  export function toRad(value: BigDecimal): BigInt {
+    return value.times(RAD).truncate(0).digits
+  }
+
+  export function fromRay(value: BigInt): BigDecimal {
+    return value.divDecimal(RAY)
+  }
+
+  export function toRay(value: BigDecimal): BigInt {
+    return value.times(RAY).truncate(0).digits
+  }
+
+  export function fromWad(value: BigInt): BigDecimal {
+    return value.divDecimal(WAD)
+  }
+
+  export function toWad(value: BigDecimal): BigInt {
+    return value.times(WAD).truncate(0).digits
   }
 }
 
