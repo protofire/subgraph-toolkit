@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "@graphprotocol/graph-ts": ">=0.18.0",
-    "prettier": "2.0.5"
+    "prettier": "2.1.2"
   },
   "peerDependencies": {
     "@graphprotocol/graph-ts": ">=0.18.0"
