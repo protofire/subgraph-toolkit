@@ -86,4 +86,24 @@ export namespace integer {
   export function fromString(value: string): BigInt {
     return fromNumber(parseI32(value))
   }
+
+  export function toBytes(value: BigInt): Bytes {
+    return (value as Uint8Array) as Bytes
+  }
+
+  export function decrement(value: BigInt, amount: BigInt = ONE): BigInt {
+    return value.minus(amount)
+  }
+
+  export function increment(value: BigInt, amount: BigInt = ONE): BigInt {
+    return value.plus(amount)
+  }
+
+  export function min(a: BigInt, b: BigInt): BigInt {
+    return BigInt.compare(a, b) < 1 ? a : b
+  }
+
+  export function max(a: BigInt, b: BigInt): BigInt {
+    return BigInt.compare(a, b) > 1 ? a : b
+  }
 }
