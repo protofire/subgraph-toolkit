@@ -1,10 +1,18 @@
 import { Address, BigDecimal, BigInt, Bytes } from '@graphprotocol/graph-ts'
 
-import { ADDRESS_LENGTH, DEFAULT_DECIMALS } from './constants'
+import { ADDRESS_LENGTH, DEFAULT_DECIMALS, ZERO_ADDRESS } from './constants'
+
+export namespace address {
+  // Helpers
+  export function isZeroAddress(address: Address): boolean {
+    return address.toHexString() == ZERO_ADDRESS
+  }
+}
 
 export namespace bytes {
+  // Converters
   export function toAddress(address: Bytes): Address {
-    return Address.fromHexString(address.toHex()).subarray(-ADDRESS_LENGTH) as Address
+    return Address.fromHexString(address.toHexString()).subarray(-ADDRESS_LENGTH) as Address
   }
 
   export function toSignedInt(value: Bytes, signed: boolean = false, bigEndian: boolean = true): BigInt {
@@ -13,6 +21,13 @@ export namespace bytes {
 
   export function toUnsignedInt(value: Bytes, bigEndian: boolean = true): BigInt {
     return BigInt.fromUnsignedBytes(bigEndian ? (value.reverse() as Bytes) : value)
+  }
+
+  // Helpers
+  export function hexZeroPad(value: Bytes, length: i32 = 32): string {
+    let hexstring = value.toHexString()
+
+    return hexstring.substr(0, 2) + hexstring.substr(2).padStart(length * 2, '0')
   }
 }
 
@@ -23,9 +38,20 @@ export namespace decimal {
   export let ONE = BigDecimal.fromString('1')
   export let TWO = BigDecimal.fromString('2')
 
-  let WAD = BigInt.fromI32(10).pow(18).toBigDecimal()
-  let RAY = BigInt.fromI32(10).pow(27).toBigDecimal()
-  let RAD = BigInt.fromI32(10).pow(45).toBigDecimal()
+  let WAD = getPrecision(18)
+  let RAY = getPrecision(27)
+  let RAD = getPrecision(45)
+
+  // Static factory methods
+  export const convert = fromBigInt
+
+  export function fromBigInt(value: BigInt, decimals: number = DEFAULT_DECIMALS): BigDecimal {
+    let precision = BigInt.fromI32(10)
+      .pow(<u8>decimals)
+      .toBigDecimal()
+
+    return value.divDecimal(precision)
+  }
 
   export function fromNumber(value: f64): BigDecimal {
     return fromString(value.toString())
@@ -35,36 +61,38 @@ export namespace decimal {
     return BigDecimal.fromString(value)
   }
 
-  export function convert(value: BigInt, decimals: number = DEFAULT_DECIMALS): BigDecimal {
-    let precision = BigInt.fromI32(10)
-      .pow(<u8>decimals)
-      .toBigDecimal()
-
-    return value.divDecimal(precision)
-  }
-
   export function fromRad(value: BigInt): BigDecimal {
     return value.divDecimal(RAD)
-  }
-
-  export function toRad(value: BigDecimal): BigInt {
-    return value.times(RAD).truncate(0).digits
   }
 
   export function fromRay(value: BigInt): BigDecimal {
     return value.divDecimal(RAY)
   }
 
-  export function toRay(value: BigDecimal): BigInt {
-    return value.times(RAY).truncate(0).digits
-  }
-
   export function fromWad(value: BigInt): BigDecimal {
     return value.divDecimal(WAD)
   }
 
+  // Converters
+  export function toBigInt(value: BigDecimal, decimals: u8 = DEFAULT_DECIMALS): BigInt {
+    return value.times(getPrecision(decimals)).truncate(0).digits
+  }
+
+  export function toRad(value: BigDecimal): BigInt {
+    return value.times(RAD).truncate(0).digits
+  }
+
+  export function toRay(value: BigDecimal): BigInt {
+    return value.times(RAY).truncate(0).digits
+  }
+
   export function toWad(value: BigDecimal): BigInt {
     return value.times(WAD).truncate(0).digits
+  }
+
+  // Helpers
+  export function getPrecision(decimals: u8 = DEFAULT_DECIMALS): BigDecimal {
+    return BigInt.fromI32(10).pow(decimals).toBigDecimal()
   }
 }
 
@@ -78,7 +106,7 @@ export namespace integer {
 
   export let WEI_PER_ETHER = BigInt.fromI32(<i32>1000000000000000000)
 
-  // Helpers
+  // Static factory methods
   export function fromNumber(value: i32): BigInt {
     return BigInt.fromI32(value)
   }
@@ -87,10 +115,12 @@ export namespace integer {
     return fromNumber(parseI32(value))
   }
 
+  // Converters
   export function toBytes(value: BigInt): Bytes {
     return (value as Uint8Array) as Bytes
   }
 
+  // Helpers
   export function decrement(value: BigInt, amount: BigInt = ONE): BigInt {
     return value.minus(amount)
   }
