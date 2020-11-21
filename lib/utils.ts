@@ -1,8 +1,8 @@
 import { Address, BigDecimal, BigInt, Bytes } from '@graphprotocol/graph-ts'
 
-export namespace bytes {
-  const ADDRESS_LENGTH = 20
+import { ADDRESS_LENGTH, DEFAULT_DECIMALS } from './constants'
 
+export namespace bytes {
   export function toAddress(address: Bytes): Address {
     return Address.fromHexString(address.toHex()).subarray(-ADDRESS_LENGTH) as Address
   }
@@ -17,10 +17,11 @@ export namespace bytes {
 }
 
 export namespace decimal {
-  export const DEFAULT_DECIMALS = 18
-
+  // Constants
+  export let NEGATIVE_ONE = BigDecimal.fromString('-1')
   export let ZERO = BigDecimal.fromString('0')
   export let ONE = BigDecimal.fromString('1')
+  export let TWO = BigDecimal.fromString('2')
 
   let WAD = BigInt.fromI32(10).pow(18).toBigDecimal()
   let RAY = BigInt.fromI32(10).pow(27).toBigDecimal()
@@ -68,9 +69,16 @@ export namespace decimal {
 }
 
 export namespace integer {
+  // Constants
+  export let NEGATIVE_ONE = BigInt.fromI32(-1)
   export let ZERO = BigInt.fromI32(0)
   export let ONE = BigInt.fromI32(1)
+  export let TWO = BigInt.fromI32(2)
+  export let ONE_THOUSAND = BigInt.fromI32(1000)
 
+  export let WEI_PER_ETHER = BigInt.fromI32(<i32>1000000000000000000)
+
+  // Helpers
   export function fromNumber(value: i32): BigInt {
     return BigInt.fromI32(value)
   }
