@@ -94,6 +94,14 @@ export namespace decimal {
   export function getPrecision(decimals: u8 = DEFAULT_DECIMALS): BigDecimal {
     return BigInt.fromI32(10).pow(decimals).toBigDecimal()
   }
+
+  export function min(a: BigDecimal, b: BigDecimal): BigDecimal {
+    return BigDecimal.compare(a, b) < 1 ? a : b
+  }
+
+  export function max(a: BigDecimal, b: BigDecimal): BigDecimal {
+    return BigDecimal.compare(a, b) > 1 ? a : b
+  }
 }
 
 export namespace integer {
