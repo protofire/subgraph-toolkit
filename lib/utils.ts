@@ -38,13 +38,11 @@ export namespace decimal {
   export let ONE = BigDecimal.fromString('1')
   export let TWO = BigDecimal.fromString('2')
 
-  let WAD = getPrecision(18)
-  let RAY = getPrecision(27)
-  let RAD = getPrecision(45)
+  let WAD = BigDecimal.fromString('1000000000000000000')
+  let RAY = BigDecimal.fromString('1000000000000000000000000000')
+  let RAD = BigDecimal.fromString('1000000000000000000000000000000000000000000000')
 
   // Static factory methods
-  export const convert = fromBigInt
-
   export function fromBigInt(value: BigInt, decimals: number = DEFAULT_DECIMALS): BigDecimal {
     let precision = BigInt.fromI32(10)
       .pow(<u8>decimals)
