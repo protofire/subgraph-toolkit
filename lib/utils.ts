@@ -38,10 +38,6 @@ export namespace decimal {
   export let ONE = BigDecimal.fromString('1')
   export let TWO = BigDecimal.fromString('2')
 
-  let WAD = BigDecimal.fromString('1000000000000000000')
-  let RAY = BigDecimal.fromString('1000000000000000000000000000')
-  let RAD = BigDecimal.fromString('1000000000000000000000000000000000000000000000')
-
   // Factory methods
   export function fromBigInt(value: BigInt, decimals: i32 = DEFAULT_DECIMALS): BigDecimal {
     let precision = BigInt.fromI32(10)
@@ -59,33 +55,9 @@ export namespace decimal {
     return BigDecimal.fromString(value)
   }
 
-  export function fromRad(value: BigInt): BigDecimal {
-    return value.divDecimal(RAD)
-  }
-
-  export function fromRay(value: BigInt): BigDecimal {
-    return value.divDecimal(RAY)
-  }
-
-  export function fromWad(value: BigInt): BigDecimal {
-    return value.divDecimal(WAD)
-  }
-
   // Converters
   export function toBigInt(value: BigDecimal, decimals: u8 = DEFAULT_DECIMALS): BigInt {
     return value.times(getPrecision(decimals).toBigDecimal()).truncate(0).digits
-  }
-
-  export function toRad(value: BigDecimal): BigInt {
-    return value.times(RAD).truncate(0).digits
-  }
-
-  export function toRay(value: BigDecimal): BigInt {
-    return value.times(RAY).truncate(0).digits
-  }
-
-  export function toWad(value: BigDecimal): BigInt {
-    return value.times(WAD).truncate(0).digits
   }
 
   // Helpers
@@ -141,5 +113,37 @@ export namespace integer {
 
   export function max(a: BigInt, b: BigInt): BigInt {
     return BigInt.compare(a, b) > 1 ? a : b
+  }
+}
+
+export namespace units {
+  export let WAD = BigDecimal.fromString('1000000000000000000')
+  export let RAY = BigDecimal.fromString('1000000000000000000000000000')
+  export let RAD = BigDecimal.fromString('1000000000000000000000000000000000000000000000')
+
+  // Factory methods
+  export function fromRad(value: BigInt): BigDecimal {
+    return value.divDecimal(RAD)
+  }
+
+  export function fromRay(value: BigInt): BigDecimal {
+    return value.divDecimal(RAY)
+  }
+
+  export function fromWad(value: BigInt): BigDecimal {
+    return value.divDecimal(WAD)
+  }
+
+  // Converters
+  export function toRad(value: BigDecimal): BigInt {
+    return value.times(RAD).truncate(0).digits
+  }
+
+  export function toRay(value: BigDecimal): BigInt {
+    return value.times(RAY).truncate(0).digits
+  }
+
+  export function toWad(value: BigDecimal): BigInt {
+    return value.times(WAD).truncate(0).digits
   }
 }
