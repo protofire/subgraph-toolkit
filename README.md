@@ -298,6 +298,7 @@ module.exports = {
 The following subgraphs are using this library:
 * [Maker Protocol](https://thegraph.com/explorer/subgraph/protofire/maker-protocol)
 * [Curve](https://thegraph.com/explorer/subgraph/protofire/curve)
+* [Nexus Mutual](https://thegraph.com/explorer/subgraph/protofire/nexus-mutual)
 * [SuperRare](https://thegraph.com/explorer/subgraph/protofire/superrare)
 
 
