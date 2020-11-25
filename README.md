@@ -12,8 +12,8 @@
 * [Features](##features)
 * [Install](##install)
 * [Usage](##usage)
-* [Examples](##example)
 * [Documentation](##documentation)
+* [Examples](##example)
 * [Contributing](##contributing)
 
 
@@ -114,17 +114,191 @@ module.exports = {
 ```
 
 
+## Documentation 📄
+
+### Constants
+<dl>
+<dt>ADDRESS_ZERO</dt>
+<dd>The address zero, which is 20 bytes (40 nibbles) of zero. Aliases: GENESIS_ADDRESS, ZERO_ADDRESS</dd>
+
+<dt>HASH_ZERO</dt>
+<dd>The hash zero, which is 32 bytes (64 nibbles) of zero. Alias: ZERO_HASH</dd>
+
+<dt>MAX_UINT</dt>
+<dd>The hex string representing the maximum `uint256` value. Alias: MAX_UINT_256</dd>
+</dl>
+
+#### Integers
+<dl>
+<dt>integer. NEGATIVE_ONE</dt>
+<dd>The BigInt representing -1</dd>
+
+<dt>integer. ZERO</dt>
+<dd>The BigInt representing 0</dd>
+
+<dt>integer. ONE</dt>
+<dd>The BigInt representing 1</dd>
+
+<dt>integer. TWO</dt>
+<dd>The BigInt representing 2</dd>
+
+<dt>integer. ONE_THOUSAND</dt>
+<dd>The BigInt representing 1000</dd>
+
+<dt>integer. WEI_PER_ETHER</dt>
+<dd>The BigInt representing 10<sup>18</sup></dd>
+</dl>
+
+#### Decimals
+<dl>
+<dt>decimal. NEGATIVE_ONE</dt>
+<dd>The BigDecimal representing -1</dd>
+
+<dt>decimal. ZERO</dt>
+<dd>The BigDecimal representing 0</dd>
+
+<dt>decimal. ONE</dt>
+<dd>The BigDecimal representing 1</dd>
+
+<dt>decimal. TWO</dt>
+<dd>The BigDecimal representing 2</dd>
+</dl>
+
+#### Units
+
+##### MakerDAO
+<dl>
+<dt>units. WAD</dt>
+<dd>The BigDecimal representing 10<sup>18</sup></dd>
+
+<dt>units. RAY</dt>
+<dd>The BigDecimal representing 10<sup>27</sup></dd>
+
+<dt>units. RAD</dt>
+<dd>The BigDecimal representing 10<sup>45</sup></dd>
+</dl>
+
+### Helper functions
+
+#### Addresses
+<dl>
+<dt>address. isZeroAddress(address: Address) → Boolean</dt>
+<dd>Checks if a given address is the zero address</dd>
+</dl>
+
+#### Byte Manipulation
+<dl>
+<dt>bytes. toAddress(address: Bytes) → Address</dt>
+<dd>Checks if a given address is the zero address (0x0)</dd>
+
+<dt>bytes. toSignedInt(value: Bytes, bigEndian: Boolean = true) → BigInt</dt>
+<dd>Converts Bytes to a signed BigInt using a given endianness</dd>
+
+<dt>bytes. toUnsignedInt(value: Bytes, bigEndian: Boolean = true) → BigInt</dt>
+<dd>Converts Bytes to a unsigned BigInt using a given endianness</dd>
+
+<dt>bytes. hexZeroPad(value: Bytes, length: i32 → String</dt>
+<dd>Returns a hex string padded with zeros (on the left) to length bytes (each byte is two nibbles)</dd>
+</dl>
+
+
+#### Integer
+<dl>
+<dt>integer. fromBigInt(value: BigInt, decimals: i32 = 18) → BigDecimal</dt>
+<dd>Converts a BigInt to a BigDecimal including a given number of decimals (by default, 18 decimals)</dd>
+
+##### Factory methods
+<dt>integer. fromNumber(value: i32) → BigInt</dt>
+<dd>Converts a integer number to a BigInt</dd>
+
+<dt>integer. fromString(value: String) → BigInt</dt>
+<dd>Parses a string as a BigInt</dd>
+</dl>
+
+##### Converters
+<dl>
+<dt>integer. toBytes(value: BigInt) → Bytes</dt>
+<dd>Converts a BigInt to a raw Bytes</dd>
+</dl>
+
+##### Other helpers
+<dl>
+<dt>integer. decrement(value: BigInt, amount: BigInt = 1) → BigInt</dt>
+<dd>Decrements a BigInt by a given amount and returns the new value (by default, decrements by 1)</dd>
+
+<dt>integer. increment(value: BigInt, amount: BigInt = 1) → BigInt</dt>
+<dd>Increments a BigInt by a given amount and returns the new value (by default, increments by 1)</dd>
+
+<dt>integer. min(a: BigInt, b: BigInt) → BigInt</dt>
+<dd>Returns the smallest of the given numbers</dd>
+
+<dt>integer. max(a: BigInt, b: BigInt) → BigInt</dt>
+<dd>Returns the largest of the given numbers</dd>
+</dl>
+
+
+#### Decimal
+<dl>
+<dt>decimal. fromBigInt(value: BigInt, decimals: i32 = 18) → BigDecimal</dt>
+<dd>Converts a BigInt to a BigDecimal including a given number of decimals (by default, 18 decimals)</dd>
+
+##### Factory methods
+<dt>decimal. fromNumber(value: f64) → BigDecimal</dt>
+<dd>Converts a float number to a BigDecimal</dd>
+
+<dt>decimal. fromString(value: String) → BigDecimal</dt>
+<dd>Parses a string as a BigDecimal</dd>
+</dl>
+
+##### Converters
+<dl>
+<dt>decimal. toBigInt(value: BigDecimal, decimals: u8 = 18) → BigInt</dt>
+<dd>Converts a BigDecimal to a BigInt using a given number of decimals (by default, 18 decimals)</dd>
+</dl>
+
+##### Other helpers
+<dl>
+<dt>decimal. getPrecision(decimals: u8 = 18) → BigInt</dt>
+<dd>Returns a BigInt representing a unit of a fixed point decimal with a given number of decimals (by default, 18 decimals)</dd>
+
+<dt>decimal. min(a: BigDecimal, b: BigDecimal) → BigDecimal</dt>
+<dd>Returns the smallest of the given numbers</dd>
+
+<dt>decimal. max(a: BigDecimal, b: BigDecimal) → BigDecimal</dt>
+<dd>Returns the largest of the given numbers</dd>
+</dl>
+
+
+#### Units
+
+##### MakerDAO
+<dl>
+<dt>units. fromRad(value: BigInt) → BigDecimal</dt>
+<dd>Reads a BigInt as a fixed point decimal with 18 decimals (used for basic quantities, e.g. balances)</dd>
+
+<dt>units. fromRay(value: BigInt) → BigDecimal</dt>
+<dd>Reads a BigInt as a fixed point decimal with 27 decimals (for precise quantites, e.g. ratios)</dd>
+
+<dt>units. fromWad(value: BigInt) → BigDecimal</dt>
+<dd>Reads a BigInt as a fixed point decimal with 45 decimals (result of integer multiplication with a `wad` and a `ray)</dd>
+
+<dt>units. toRad(value: BigDecimal) → BigInt</dt>
+<dd>Converts a BigDecimal to a BigInt representing a fixed point decimal with 18 decimals (used for basic quantities, e.g. balances)</dd>
+
+<dt>units. toRay(value: BigDecimal) → BigInt</dt>
+<dd>Converts a BigDecimal to a BigInt representing a fixed point decimal with 27 decimals (for precise quantites, e.g. ratios)</dd>
+
+<dt>units. toWad(value: BigDecimal) → BigInt</dt>
+<dd>Converts a BigDecimal to a BigInt representing a fixed point decimal with 45 decimals (result of integer multiplication with a <code>WAD</code> and a <code>RAY</code>)</dd>
+</dl>
+
+
 ## Examples 🖍
 
 The following subgraphs are using this library:
 * [Maker Protocol](https://thegraph.com/explorer/subgraph/protofire/maker-protocol)
 * [Curve](https://thegraph.com/explorer/subgraph/protofire/curve)
 * [SuperRare](https://thegraph.com/explorer/subgraph/protofire/superrare)
-
-
-## Documentation 📄
-
-TODO
 
 
 ## Contributing 🍰
