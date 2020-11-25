@@ -15,7 +15,7 @@ export namespace bytes {
     return Address.fromHexString(address.toHexString()).subarray(-ADDRESS_LENGTH) as Address
   }
 
-  export function toSignedInt(value: Bytes, signed: boolean = false, bigEndian: boolean = true): BigInt {
+  export function toSignedInt(value: Bytes, bigEndian: boolean = true): BigInt {
     return BigInt.fromSignedBytes(bigEndian ? (value.reverse() as Bytes) : value)
   }
 
@@ -42,8 +42,8 @@ export namespace decimal {
   let RAY = BigDecimal.fromString('1000000000000000000000000000')
   let RAD = BigDecimal.fromString('1000000000000000000000000000000000000000000000')
 
-  // Static factory methods
-  export function fromBigInt(value: BigInt, decimals: number = DEFAULT_DECIMALS): BigDecimal {
+  // Factory methods
+  export function fromBigInt(value: BigInt, decimals: i32 = DEFAULT_DECIMALS): BigDecimal {
     let precision = BigInt.fromI32(10)
       .pow(<u8>decimals)
       .toBigDecimal()
@@ -73,7 +73,7 @@ export namespace decimal {
 
   // Converters
   export function toBigInt(value: BigDecimal, decimals: u8 = DEFAULT_DECIMALS): BigInt {
-    return value.times(getPrecision(decimals)).truncate(0).digits
+    return value.times(getPrecision(decimals).toBigDecimal()).truncate(0).digits
   }
 
   export function toRad(value: BigDecimal): BigInt {
@@ -89,8 +89,8 @@ export namespace decimal {
   }
 
   // Helpers
-  export function getPrecision(decimals: u8 = DEFAULT_DECIMALS): BigDecimal {
-    return BigInt.fromI32(10).pow(decimals).toBigDecimal()
+  export function getPrecision(decimals: u8 = DEFAULT_DECIMALS): BigInt {
+    return BigInt.fromI32(10).pow(decimals)
   }
 
   export function min(a: BigDecimal, b: BigDecimal): BigDecimal {
@@ -112,7 +112,7 @@ export namespace integer {
 
   export let WEI_PER_ETHER = BigInt.fromI32(<i32>1000000000000000000)
 
-  // Static factory methods
+  // Factory methods
   export function fromNumber(value: i32): BigInt {
     return BigInt.fromI32(value)
   }
