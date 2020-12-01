@@ -9,12 +9,12 @@
 
 **Content**
 
-* [Features](#features)
-* [Install](#install)
-* [Usage](#usage)
-* [Documentation](#documentation)
-* [Examples](#example)
-* [Contributing](#contributing)
+* [Features](#features-)
+* [Install](#install-)
+* [Usage](#usage-)
+* [Documentation](#documentation-)
+* [Examples](#example-)
+* [Contributing](#contributing-)
 
 
 ## Features ✨
