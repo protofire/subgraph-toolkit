@@ -1,5 +1,5 @@
 # Subgraph Toolkit
-<p><i>A Swiss Army knife for building subgraphs on [The Graph Protocol](https://thegraph.com)</i></p>
+A Swiss Army knife for building subgraphs on [The Graph Protocol](https://thegraph.com)
 
 [![NPM Package](https://img.shields.io/npm/v/@protofire/subgraph-toolkit)](https://www.npmjs.com/package/@protofire/subgraph-toolkit)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
