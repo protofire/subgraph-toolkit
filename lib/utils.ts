@@ -37,6 +37,7 @@ export namespace decimal {
   export let ZERO = BigDecimal.fromString('0')
   export let ONE = BigDecimal.fromString('1')
   export let TWO = BigDecimal.fromString('2')
+  export let ONE_HUNDRED = BigDecimal.fromString('100')
 
   // Factory methods
   export function fromBigInt(value: BigInt, decimals: i32 = DEFAULT_DECIMALS): BigDecimal {
