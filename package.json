@@ -11,10 +11,10 @@
     "@protofire/subgraph-prettier-config": "^0.1.1"
   },
   "devDependencies": {
-    "@graphprotocol/graph-ts": ">=0.18.0",
+    "@graphprotocol/graph-ts": ">=0.20.0",
     "prettier": "2.1.2"
   },
   "peerDependencies": {
-    "@graphprotocol/graph-ts": ">=0.18.0"
+    "@graphprotocol/graph-ts": ">=0.20.0"
   }
 }
