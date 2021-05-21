@@ -1,6 +1,6 @@
 {
   "name": "@protofire/subgraph-toolkit",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "AssemblyScript helpers for writing subgraph mappings for The Graph",
   "repository": "https://github.com/protofire/subgraph-toolkit.git",
   "license": "GPL-3.0-only",
