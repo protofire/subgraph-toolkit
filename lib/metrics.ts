@@ -57,6 +57,7 @@ export namespace metrics {
     constructor(id: string) {
       super()
       this.set('id', Value.fromString(id))
+      this.set('count', Value.fromBigInt(integer.ZERO))
     }
 
     save(): void {
@@ -88,26 +89,18 @@ export namespace metrics {
       return value.toBigInt()
     }
 
-    set count(value: BigInt) {
+    private set count(value: BigInt) {
       this.set('count', Value.fromBigInt(value))
     }
 
-    add(value: BigInt): Counter {
+    increase(value: BigInt = integer.ONE): Counter {
       this.count = this.count.plus(value)
       return this
     }
 
-    subtract(value: BigInt): Counter {
+    decrease(value: BigInt = integer.ONE): Counter {
       this.count = this.count.minus(value)
       return this
-    }
-
-    increase(): Counter {
-      return this.add(integer.ONE)
-    }
-
-    decrease(): Counter {
-      return this.subtract(integer.ONE)
     }
   }
 
