@@ -20,7 +20,7 @@ export namespace bytes {
   }
 
   export function toUnsignedInt(value: Bytes, bigEndian: boolean = true): BigInt {
-    return BigInt.fromUnsignedBytes(bigEndian ? (value.reverse() as Bytes) : value)
+    return BigInt.fromUnsignedBytes(bigEndian ? Bytes.fromUint8Array(value.reverse()) : value)
   }
 
   // Helpers
