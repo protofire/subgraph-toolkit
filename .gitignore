@@ -3,4 +3,4 @@ build/
 package/
 .idea/
 .vscode/
-/**/*.spec.wat
+*.wat
