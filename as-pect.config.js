@@ -2,19 +2,23 @@ module.exports = {
   /**
    * A set of globs passed to the glob package that qualify typescript files for testing.
    */
-  include: ["assembly/__tests__/**/*.spec.ts"],
+  include: ["lib/__tests__/**/*.spec.ts"],
   /**
    * A set of globs passed to the glob package that quality files to be added to each test.
    */
-  add: ["assembly/__tests__/**/*.include.ts"],
+  add: ["lib/__tests__/**/*.include.ts"],
   /**
    * All the compiler flags needed for this test suite. Make sure that a binary file is output.
    */
   flags: {
-    /** To output a wat file, uncomment the following line. */
-    // "--textFile": ["output.wat"],
-    /** A runtime must be provided here. */
-    "--runtime": ["incremental"], // Acceptable values are: "incremental", "minimal", and "stub"
+    // "--debug": [],
+    /** This is required. Do not change this. The filename is ignored, but required by the compiler. */
+    "--binaryFile": ["output.wasm"],
+    /** To enable wat file output, use the following flag. The filename is ignored, but required by the compiler. */
+    "--textFile": ["output.wat"],
+    "--runtime": ["stub"], // Acceptable values are: full, half, stub (arena), and none,
+    "--baseDir": process.cwd(),
+    // "--runPasses": ["dce"]
   },
   /**
    * A set of regexp that will disclude source files from testing.
@@ -23,18 +27,49 @@ module.exports = {
   /**
    * Add your required AssemblyScript imports here.
    */
-  imports(memory, createImports, instantiateSync, binary) {
-    let instance; // Imports can reference this
-    const myImports = {
-      // put your web assembly imports here, and return the module
-    };
-    instance = instantiateSync(binary, createImports(myImports));
-    return instance;
+  imports: {
+    'graph-ts': './node_modules/@graphprotocol/graph-ts'
   },
-  /** Enable code coverage. */
-  // coverage: ["assembly/**/*.ts"],
   /**
-   * Specify if the binary wasm file should be written to the file system.
+   * All performance statistics reporting can be configured here.
    */
-  outputBinary: false,
+  performance: {
+    /** Enable performance statistics gathering. */
+    enabled: false,
+    /** Set the maximum number of samples to run for each test. */
+    maxSamples: 10000,
+    /** Set the maximum test run time in milliseconds. */
+    maxTestRunTime: 2000,
+    /** Set the number of decimal places to round to. */
+    roundDecimalPlaces: 3,
+    /** Report the median time in the default reporter. */
+    reportMedian: true,
+    /** Report the average time in milliseconds. */
+    reportAverage: true,
+    /** Report the standard deviation. */
+    reportStandardDeviation: false,
+    /** Report the maximum run time in milliseconds. */
+    reportMax: false,
+    /** Report the minimum run time in milliseconds. */
+    reportMin: false,
+    /** Report the variance. */
+    reportVariance: false,
+  },
+  /**
+   * Add a custom reporter here if you want one. The following example is in typescript.
+   *
+   * @example
+   * import { TestReporter, TestGroup, TestResult, TestContext } from "as-pect";
+   *
+   * export class CustomReporter extends TestReporter {
+   *   // implement each abstract method here
+   *   public abstract onStart(suite: TestContext): void;
+   *   public abstract onGroupStart(group: TestGroup): void;
+   *   public abstract onGroupFinish(group: TestGroup): void;
+   *   public abstract onTestStart(group: TestGroup, result: TestResult): void;
+   *   public abstract onTestFinish(group: TestGroup, result: TestResult): void;
+   *   public abstract onFinish(suite: TestContext): void;
+   * }
+   */
+  // reporter: new CustomReporter(),
 };
