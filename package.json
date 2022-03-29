@@ -4,9 +4,9 @@
   "description": "AssemblyScript helpers for writing subgraph mappings for The Graph",
   "repository": "https://github.com/protofire/subgraph-toolkit.git",
   "license": "GPL-3.0-only",
-  "module": "lib/index.ts",
-  "types": "lib/index.ts",
-  "main": "lib/index.ts",
+  "module": "index.ts",
+  "types": "index.ts",
+  "main": "index.ts",
   "scripts": {
     "lint": "eslint --max-warnings 0 --ext ts \"assembly/**/*.ts\"",
     "lint:fix": "yarn lint --fix",
