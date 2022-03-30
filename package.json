@@ -1,20 +1,24 @@
 {
   "name": "@protofire/subgraph-toolkit",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "AssemblyScript helpers for writing subgraph mappings for The Graph",
   "repository": "https://github.com/protofire/subgraph-toolkit.git",
   "license": "GPL-3.0-only",
-  "author": "Sebastián Galiano",
   "module": "index.ts",
   "types": "index.ts",
-  "dependencies": {
-    "@protofire/subgraph-prettier-config": "^0.1.1"
+  "main": "index.ts",
+  "scripts": {
+    "lint": "eslint --max-warnings 0 --ext ts \"assembly/**/*.ts\"",
+    "lint:fix": "yarn lint --fix",
+    "test": "asp"
   },
   "devDependencies": {
+    "@as-pect/cli": "^6.2.4",
     "@graphprotocol/graph-ts": ">=0.20.0",
-    "prettier": "2.1.2"
-  },
-  "peerDependencies": {
-    "@graphprotocol/graph-ts": ">=0.20.0"
+    "@typescript-eslint/eslint-plugin": "^4.16.0",
+    "@typescript-eslint/parser": "^4.16.0",
+    "assemblyscript": "^0.19.3",
+    "eslint": "^7.21.0",
+    "typescript": "^4.1.3"
   }
 }

@@ -20,3 +20,9 @@ export const ZERO_HASH = HASH_ZERO
 
 export const MAX_UINT_256 = '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'
 export const MAX_UINT = MAX_UINT_256
+
+// Time
+export const SECONDS_IN_MINUTE = 60
+export const SECONDS_IN_HOUR = SECONDS_IN_MINUTE * 60
+export const SECONDS_IN_DAY = SECONDS_IN_HOUR * 24
+export const SECONDS_IN_WEEK = SECONDS_IN_DAY * 7
