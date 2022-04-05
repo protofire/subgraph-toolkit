@@ -12,11 +12,11 @@ export namespace address {
 export namespace bytes {
   // Converters
   export function toAddress(address: Bytes): Address {
-    return Address.fromHexString(address.toHexString()).subarray(-ADDRESS_LENGTH) as Address
+    return Address.fromBytes(Address.fromUint8Array(Address.fromHexString(address.toHexString()).subarray(-ADDRESS_LENGTH)))
   }
 
   export function toSignedInt(value: Bytes, bigEndian: boolean = true): BigInt {
-    return BigInt.fromSignedBytes(bigEndian ? (value.reverse() as Bytes) : value)
+    return BigInt.fromSignedBytes(bigEndian ? Bytes.fromUint8Array(value.reverse()) : value)
   }
 
   export function toUnsignedInt(value: Bytes, bigEndian: boolean = true): BigInt {
