@@ -116,6 +116,62 @@ module.exports = {
 
 ## Documentation 📄
 
+### Tests
+
+This library aims to reduce the verbosity of [matschtick](https://github.com/LimeChain/matchstick) providing many useful functions to wrap repetitive tasks suchs as create events, mock calls an assert some TypedValues.
+
+#### Logs 
+
+This is a simple wrapper to add an standard way to create custom logs including the parent test name.
+
+#### Asserts - Assert Many: 
+Avoids the repetition for "assert.fieldEquals" by providing a typedMap of params.
+
+Exmaple: 
+
+`assert.fieldEquals("EntityName", "entityId", "propName", "propValue");
+assert.fieldEquals("EntityName", "entityId", "anotherProp", "anotherValue");`
+
+Can be replaced with:
+
+`let params = new TypedMap<string, string>()
+params.set("propName", propVal)
+params.set("anotherProp", anotherVal)
+asserts.assertMany(
+	"EntityName", entityId, params
+)`
+
+The entity name and id will be typed once.
+
+#### Asserts - Assert Equal:
+
+An standar way to assert type values while simplifing the process of conversion between graph-ts types and ethereum.value and centralizing the logs allowing to know on each assertion the values being compared.
+
+It also provides support for standard graph-ts type suchs as Address, Bytes, BigInt, etc.
+
+
+#### events - getNewEvent:
+
+Simplifies the process of mocking events taking care of mockEvent instanciation and params pushing 
+. Create a new event just by passing an array of ethereum.EventParam
+
+#### calls - getNewCall:
+
+Simplifies the process of mocking calls taking care of mockCall instanciation and params pushing 
+. Create a new call just by passing an array of ethereum.EventParam
+
+#### contractCalls - mockFunction
+
+Simplifies the process of mocking contract calls 
+exmaple:
+`tests.helpers.contractCalls.mockFunction(
+		contractAddress,
+		"isInitialized",
+		"isInitialized():(bool)",
+		[],
+		[tests.helpers.ethereumValue.getFromBoolean(true)]
+	)`
+
 ### Constants
 <dl>
 <dt>ADDRESS_ZERO</dt>
