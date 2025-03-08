@@ -13,7 +13,7 @@ A Swiss Army knife for building subgraphs on [The Graph Protocol](https://thegra
 * [Install](#install-)
 * [Usage](#usage-)
 * [Documentation](#documentation-)
-* [Examples](#example-)
+* [Examples](#examples-)
 * [Contributing](#contributing-)
 
 
